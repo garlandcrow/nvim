@@ -44,14 +44,14 @@
 -- vim.keymap.set("v", "h", "i", { noremap = true })
 -- vim.keymap.set("o", "h", "i", { noremap = true })
 -- -- Remap H to do the same as I
--- vim.api.nvim_set_keymap("n", "H", "0i", { noremap = true })
+-- vim.keymap.set("n", "H", "0i", { noremap = true })
 
 -- move lines up/down
 vim.keymap.set("v", "I", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '>+1<CR>gv=gv")
 
 -- redo
-vim.api.nvim_set_keymap("n", "U", "<C-r>", { noremap = true })
+vim.keymap.set("n", "U", "<C-r>", { noremap = true })
 
 -- swap pastes, just cause im used to before cursor
 vim.keymap.set("n", "p", "P", { noremap = true })
@@ -64,11 +64,15 @@ vim.keymap.set("n", "P", "p", { noremap = true })
 --   { noremap = true, silent = true, desc = "Resume" }
 -- )
 
+-- Swap ; and :
+-- vim.keymap.set("n", ";", ":", { noremap = true })
+-- vim.keymap.set("n", ":", ";", { noremap = true })
+
 -- swap arrows in the command dropdown to make sense visually
-vim.api.nvim_set_keymap("c", "<up>", "wildmenumode() ? '<left>' : '<up>'", { expr = true, noremap = true })
-vim.api.nvim_set_keymap("c", "<down>", "wildmenumode() ? '<right>' : '<down>'", { expr = true, noremap = true })
-vim.api.nvim_set_keymap("c", "<left>", "wildmenumode() ? '<up>' : '<left>'", { expr = true, noremap = true })
-vim.api.nvim_set_keymap("c", "<right>", "wildmenumode() ? '<bs><C-Z>' : '<right>'", { expr = true, noremap = true })
+vim.keymap.set("c", "<up>", "wildmenumode() ? '<left>' : '<up>'", { expr = true, noremap = true })
+vim.keymap.set("c", "<down>", "wildmenumode() ? '<right>' : '<down>'", { expr = true, noremap = true })
+vim.keymap.set("c", "<left>", "wildmenumode() ? '<up>' : '<left>'", { expr = true, noremap = true })
+vim.keymap.set("c", "<right>", "wildmenumode() ? '<bs><C-Z>' : '<right>'", { expr = true, noremap = true })
 
 -- joins two lines but leaves the cursor at the end of the joined line
 vim.keymap.set("n", "J", "mzJ`z")

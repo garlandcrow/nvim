@@ -6,17 +6,7 @@ return {
       ---@type lspconfig.options
       servers = {
         svelte = {},
-        rust_analyzer = {},
-        elixirls = {},
       },
     },
-  }, --
-  -- {
-  --   "williamboman/mason.nvim",
-  --   opts = {
-  --     ensure_installed = {
-  --       "svelte-language-server",
-  --     },
-  --   },
-  -- },
+  },
 }
