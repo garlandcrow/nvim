@@ -47,8 +47,8 @@
 -- vim.keymap.set("n", "H", "0i", { noremap = true })
 
 -- move lines up/down
-vim.keymap.set("v", "I", ":m '<-2<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 
 -- redo
 vim.keymap.set("n", "U", "<C-r>", { noremap = true })
