@@ -96,15 +96,26 @@ vim.keymap.set("n", "<leader>bx", "<cmd>!chmod +x %<CR>", { silent = true, desc 
 vim.keymap.set(
   "n",
   "<leader>r",
-  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]],
   { desc = "Replace all cursor word" }
+)
+
+-- https://vim.fandom.com/wiki/Search_for_visually_selected_text
+vim.keymap.set("v", "//", "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>", { noremap = true })
+
+-- https://www.reddit.com/r/neovim/comments/tyg650/comment/i3swll2/?utm_source=reddit&utm_medium=web2x&context=3
+vim.keymap.set(
+  "x",
+  "<leader>cw",
+  "y<cmd>let @/=substitute(escape(@\", '/'), '\\n', '\\\\n', 'g')<cr>\"_cgn",
+  { noremap = true }
 )
 
 -- vim.keymap.set("v", "<leader>r", [[:'<,'>y<CR>:%s/\<<C-r>"\>//gI<Left><Left><Left>]], { desc = "Replace all selected text in file" })
 vim.keymap.set(
   "v",
   "<leader>r",
-  [[y:let @z=@"<CR>:%s/<C-r>z//gI<Left><Left><Left>]],
+  [[y:let @z=@"<CR>:%s/<C-r>z//gIc<Left><Left><Left><Left>]],
   { desc = "Replace all selected text in file" }
 )
 
@@ -124,4 +135,6 @@ vim.keymap.set("n", "<leader>bl", "<cmd>bprevious<cr>", { desc = "Previous buffe
 -- end, { expr = true })
 
 -- disabled keys
-vim.keymap.set("n", "s", "<nop>")
+vim.keymap.set({ "n", "v" }, "s", "<Nop>", { noremap = true })
+
+vim.keymap.set("n", "<CR>", "ciw", { noremap = true, silent = true })
