@@ -47,8 +47,12 @@
 -- vim.keymap.set("n", "H", "0i", { noremap = true })
 
 -- move lines up/down
-vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+-- vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
+-- vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("n", "<C-S-j>", ":m .+1<CR>==")
+vim.keymap.set("v", "<C-S-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("n", "<C-S-k>", ":m .-2<CR>==")
+vim.keymap.set("v", "<C-S-k>", ":m '<-2<cr>gv=gv")
 
 -- redo
 vim.keymap.set("n", "U", "<C-r>", { noremap = true })
@@ -89,42 +93,72 @@ vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste over selection" })
 
 -- delete to black hole
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to black hole" })
+vim.keymap.set("n", "x", '"_x', { noremap = true })
 
 vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format, { desc = "Format buffer" })
 vim.keymap.set("n", "<leader>bx", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make buffer executable" })
 
+vim.keymap.set("n", "<leader>o", "o<Esc>")
+vim.keymap.set("n", "<leader>O", "O<Esc>")
+
+-- easy replace in normal mode
 vim.keymap.set(
   "n",
   "<leader>r",
-  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]],
-  { desc = "Replace all cursor word" }
+  [[:%s/\<<C-r><C-w>\>//gIc<Left><Left><Left><Left>]],
+  { desc = "Replace cursor word (confirm)" }
 )
 
--- https://vim.fandom.com/wiki/Search_for_visually_selected_text
-vim.keymap.set("v", "//", "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>", { noremap = true })
+vim.keymap.set("n", "<leader>ra", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { desc = "Replace cursor word (all)" })
 
--- https://www.reddit.com/r/neovim/comments/tyg650/comment/i3swll2/?utm_source=reddit&utm_medium=web2x&context=3
 vim.keymap.set(
-  "x",
-  "<leader>cw",
-  "y<cmd>let @/=substitute(escape(@\", '/'), '\\n', '\\\\n', 'g')<cr>\"_cgn",
-  { noremap = true }
+  "n",
+  "<leader>R",
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]],
+  { desc = "Replace cursor word (confirm)" }
 )
 
--- vim.keymap.set("v", "<leader>r", [[:'<,'>y<CR>:%s/\<<C-r>"\>//gI<Left><Left><Left>]], { desc = "Replace all selected text in file" })
+vim.keymap.set(
+  "n",
+  "<leader>Ra",
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Replace cursor word (all)" }
+)
+
+-- easy replace in visual mode
 vim.keymap.set(
   "v",
   "<leader>r",
   [[y:let @z=@"<CR>:%s/<C-r>z//gIc<Left><Left><Left><Left>]],
-  { desc = "Replace all selected text in file" }
+  { desc = "Replace selected text (confirm)" }
 )
 
-vim.keymap.set({ "n", "v", "i" }, "<C-x>", function()
-  require("mini.bufremove").delete(0, false)
-end)
+vim.keymap.set(
+  "v",
+  "<leader>ra",
+  [[y:let @z=@"<CR>:%s/<C-r>z//gI<Left><Left><Left>]],
+  { desc = "Replace selected text (all)" }
+)
 
-vim.keymap.set("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>bl", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+-- https://vim.fandom.com/wiki/Search_for_visually_selected_text
+-- vim.keymap.set("v", "//", "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>", { noremap = true })
+
+-- https://www.reddit.com/r/neovim/comments/tyg650/comment/i3swll2/?utm_source=reddit&utm_medium=web2x&context=3
+-- vim.keymap.set(
+--   "x",
+--   "<leader>cw",
+--   "y<cmd>let @/=substitute(escape(@\", '/'), '\\n', '\\\\n', 'g')<cr>\"_cgn",
+--   { noremap = true }
+-- )
+
+-- vim.keymap.set({ "n", "v", "i" }, "<C-x>", function()
+--   require("mini.bufremove").delete(0, false)
+-- end)
+--
+-- vim.keymap.set("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next buffer" })
+-- vim.keymap.set("n", "<leader>bl", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>bsd", "<cmd>%bd|e#|bd#<cr>|'<cr>", { desc = "Delete surrounding buffers" })
+
 -- vim.keymap.set("n", "<leader>jj", function()
 --   local count = #vim.api.nvim_list_wins()
 --   if count == 1 then
@@ -134,7 +168,11 @@ vim.keymap.set("n", "<leader>bl", "<cmd>bprevious<cr>", { desc = "Previous buffe
 --   end
 -- end, { expr = true })
 
+vim.keymap.set("n", "<CR>", "viw", { noremap = true, silent = true })
+
+-- fix G and gg
+vim.keymap.set("n", "gg", "gg0", { noremap = true, silent = true })
+vim.keymap.set("n", "G", "G$", { noremap = true, silent = true })
+
 -- disabled keys
 vim.keymap.set({ "n", "v" }, "s", "<Nop>", { noremap = true })
-
-vim.keymap.set("n", "<CR>", "ciw", { noremap = true, silent = true })

@@ -11,6 +11,7 @@ return {
       ---@type lspconfig.options
       servers = {
         svelte = {},
+        pyright = {},
       },
     },
   },
