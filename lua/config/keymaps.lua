@@ -73,10 +73,10 @@ vim.keymap.set("n", "P", "p", { noremap = true })
 -- vim.keymap.set("n", ":", ";", { noremap = true })
 
 -- swap arrows in the command dropdown to make sense visually
-vim.keymap.set("c", "<up>", "wildmenumode() ? '<left>' : '<up>'", { expr = true, noremap = true })
-vim.keymap.set("c", "<down>", "wildmenumode() ? '<right>' : '<down>'", { expr = true, noremap = true })
-vim.keymap.set("c", "<left>", "wildmenumode() ? '<up>' : '<left>'", { expr = true, noremap = true })
-vim.keymap.set("c", "<right>", "wildmenumode() ? '<bs><C-Z>' : '<right>'", { expr = true, noremap = true })
+-- vim.keymap.set("c", "<up>", 'wildmenumode() ? "<Left>" : "<Up>"', { expr = true, noremap = true })
+-- vim.keymap.set("c", "<down>", 'wildmenumode() ? "<Right>" : "<Down>"', { expr = true, noremap = true })
+-- vim.keymap.set("c", "<left>", "wildmenumode() ? '<Up>' : '<Left>'", { expr = true, noremap = true })
+-- vim.keymap.set("c", "<right>", "wildmenumode() ? '<bs>\\<C-Z>' : '<Right>'", { expr = true, noremap = true })
 
 -- joins two lines but leaves the cursor at the end of the joined line
 vim.keymap.set("n", "J", "mzJ`z")
@@ -175,4 +175,4 @@ vim.keymap.set("n", "gg", "gg0", { noremap = true, silent = true })
 vim.keymap.set("n", "G", "G$", { noremap = true, silent = true })
 
 -- disabled keys
-vim.keymap.set({ "n", "v" }, "s", "<Nop>", { noremap = true })
+-- vim.keymap.set({ "n", "v" }, "s", "<Nop>", { noremap = true })

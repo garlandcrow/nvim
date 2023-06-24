@@ -21,4 +21,20 @@ return {
       },
     },
   },
+
+  {
+    "nvim-treesitter/playground",
+    keys = {
+      {
+        "<leader>uh",
+        "<cmd>TSHighlightCapturesUnderCursor<cr>",
+        desc = "Show TS Highlight",
+      },
+      {
+        "<leader>ut",
+        "<cmd>TSNodeUnderCursor<cr>",
+        desc = "Show TS Node",
+      },
+    },
+  },
 }
