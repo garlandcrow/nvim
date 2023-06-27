@@ -35,6 +35,11 @@ return {
         "<cmd>TSNodeUnderCursor<cr>",
         desc = "Show TS Node",
       },
+      {
+        "<leader>up",
+        "<cmd>TSPlayground<cr>",
+        desc = "Show TSPlayground",
+      },
     },
   },
 }

@@ -98,8 +98,8 @@ vim.keymap.set("n", "x", '"_x', { noremap = true })
 vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format, { desc = "Format buffer" })
 vim.keymap.set("n", "<leader>bx", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make buffer executable" })
 
-vim.keymap.set("n", "<leader>o", "o<Esc>")
-vim.keymap.set("n", "<leader>O", "O<Esc>")
+vim.keymap.set("n", "<leader>o", "o<Esc>", { desc = "Insert below (w/out Insert)" })
+vim.keymap.set("n", "<leader>O", "O<Esc>", { desc = "Insert above (w/out Insert)" })
 
 -- easy replace in normal mode
 vim.keymap.set(
@@ -169,10 +169,21 @@ vim.keymap.set("n", "<leader>bsd", "<cmd>%bd|e#|bd#<cr>|'<cr>", { desc = "Delete
 -- end, { expr = true })
 
 vim.keymap.set("n", "<CR>", "viw", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<CR>", function()
+--   local node = vim.treesitter.get_node_at_cursor()
+--   vim.notify(node)
+--   if node and (node == "character" or string.find(node, "string")) then
+--     return "ciq"
+--   else
+--     return "ciw"
+--   end
+-- end, { expr = true, noremap = true })
 
 -- fix G and gg
 vim.keymap.set("n", "gg", "gg0", { noremap = true, silent = true })
 vim.keymap.set("n", "G", "G$", { noremap = true, silent = true })
+
+vim.keymap.set("n", "<C-c>", "<C-a>", { noremap = true, silent = true })
 
 -- disabled keys
 -- vim.keymap.set({ "n", "v" }, "s", "<Nop>", { noremap = true })
